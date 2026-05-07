@@ -3,31 +3,55 @@
     $links= [
       [
          'name' => 'Dashboard',
-         'icon' => 'fa-solid fa-gauge',
+         'icon' => 'fa-solid fa-chart-pie',
          'href' => route('admin.dashboard'),
          'active' => request()->routeIs('admin.dashboard'),
       ],
       [
-         'header' => 'Gestion',
+         'header' => 'GESTIÓN',
 
       ],
       [
-         'name' => 'Roles y permisos',
+         'name' => 'Roles y Permisos',
          'icon' => 'fa-solid fa-shield-halved',
          'href' => route('admin.roles.index'),
          'active' => request()->routeIs('admin.roles.*'),
       ],
       [
          'name' => 'Usuarios',
-         'icon' => 'fa-solid fa-users',
+         'icon' => 'fa-solid fa-user-group',
          'href' => route('admin.users.index'),
          'active' => request()->routeIs('admin.users.*'),
       ],
       [
          'name' => 'Pacientes',
-         'icon' => 'fa-solid fa-user-injured',
+         'icon' => 'fa-solid fa-hospital-user',
          'href' => route('admin.patients.index'),
          'active' => request()->routeIs('admin.patients.*'),
+      ],
+      [
+         'name' => 'Doctores',
+         'icon' => 'fa-solid fa-user-doctor',
+         'href' => route('admin.doctors.index'),
+         'active' => request()->routeIs('admin.doctors.*'),
+      ],
+      [
+         'name' => 'Citas médicas',
+         'icon' => 'fa-solid fa-calendar-check',
+         'href' => route('admin.appointments.index'),
+         'active' => request()->routeIs('admin.appointments.*'),
+      ],
+      [
+         'name' => 'Calendario',
+         'icon' => 'fa-solid fa-calendar-days',
+         'href' => route('admin.calendar'),
+         'active' => request()->routeIs('admin.calendar'),
+      ],
+      [
+         'name' => 'Soporte',
+         'icon' => 'fa-solid fa-headset',
+         'href' => route('admin.dashboard'), // temporal
+         'active' => false,
       ],
     ];
 @endphp

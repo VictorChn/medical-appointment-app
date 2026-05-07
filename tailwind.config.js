@@ -16,6 +16,7 @@ export default {
         "./vendor/wireui/wireui/ts/**/*.ts",
         "./vendor/wireui/wireui/src/WireUi/**/*.php",
         "./vendor/wireui/wireui/src/Components/**/*.php",
+        "./node_modules/flowbite/**/*.js"
     ],
 
     theme: {
@@ -26,5 +27,9 @@ export default {
         },
     },
 
-    plugins: [forms, typography],
+    plugins: [
+        forms, 
+        typography,
+        require('flowbite/plugin')
+    ],
 };

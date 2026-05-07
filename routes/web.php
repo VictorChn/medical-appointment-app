@@ -16,5 +16,20 @@ Route::middleware([
     })->name('dashboard');
 });
 
+Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/appointments', [\App\Http\Controllers\Admin\AppointmentController::class, 'index'])->name('appointments.index');
+    Route::get('/appointments/create', [\App\Http\Controllers\Admin\AppointmentController::class, 'create'])->name('appointments.create');
+    Route::post('/appointments', [\App\Http\Controllers\Admin\AppointmentController::class, 'store'])->name('appointments.store');
+    Route::get('/appointments/{appointment}/edit', [\App\Http\Controllers\Admin\AppointmentController::class, 'edit'])->name('appointments.edit');
+    Route::put('/appointments/{appointment}', [\App\Http\Controllers\Admin\AppointmentController::class, 'update'])->name('appointments.update');
+    Route::delete('/appointments/{appointment}', [\App\Http\Controllers\Admin\AppointmentController::class, 'destroy'])->name('appointments.destroy');
+    Route::get('/appointments/{appointment}/consultation', \App\Livewire\Admin\ConsultationManager::class)->name('appointments.consultation');
+
+    Route::get('/doctors', \App\Livewire\Admin\DoctorList::class)->name('doctors.index');
+    Route::get('/doctors/{doctor}/schedules', \App\Livewire\Admin\DoctorScheduleManager::class)->name('doctors.schedules');
+
+    Route::get('/calendar', \App\Livewire\Admin\CalendarModule::class)->name('calendar');
+});
+
 
 

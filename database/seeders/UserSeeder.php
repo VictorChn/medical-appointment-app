@@ -23,5 +23,6 @@ class UserSeeder extends Seeder
             'address' => 'Test Address',
 
         ])->assignRole('Administrador');
+
     }
 }
