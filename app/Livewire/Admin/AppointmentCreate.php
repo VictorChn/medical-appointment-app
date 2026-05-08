@@ -8,6 +8,7 @@ use App\Models\Patient;
 use App\Models\Appointment;
 use App\Models\DoctorSchedule;
 use Carbon\Carbon;
+use App\Jobs\ProcessAppointmentNotifications;
 
 class AppointmentCreate extends Component
 {
@@ -108,7 +109,7 @@ class AppointmentCreate extends Component
 
         $endTime = Carbon::parse($this->selectedTime)->addMinutes(15)->format('H:i:s');
 
-        Appointment::create([
+        $appointment = Appointment::create([
             'patient_id' => $this->patientId,
             'doctor_id' => $this->selectedDoctorId,
             'date' => $this->date,
@@ -117,6 +118,8 @@ class AppointmentCreate extends Component
             'reason' => $this->reason,
             'status' => 1 // Scheduled
         ]);
+
+        ProcessAppointmentNotifications::dispatch($appointment);
 
         session()->flash('success', 'Cita creada exitosamente.');
         session()->flash('swal', true);

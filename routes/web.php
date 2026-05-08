@@ -31,5 +31,20 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::get('/calendar', \App\Livewire\Admin\CalendarModule::class)->name('calendar');
 });
 
+// --- Rutas de Prueba para visualizar Correo y PDF ---
+Route::get('/test-email', function () {
+    $appointment = \App\Models\Appointment::with(['patient', 'doctor.user'])->latest()->first();
+    if (!$appointment) {
+        return "No hay citas registradas para generar la vista previa.";
+    }
+    return new \App\Mail\AppointmentCreatedMail($appointment, 'ruta/falsa.pdf', 'patient');
+});
 
-
+Route::get('/test-pdf', function () {
+    $appointment = \App\Models\Appointment::with(['patient', 'doctor.user'])->latest()->first();
+    if (!$appointment) {
+        return "No hay citas registradas para generar la vista previa.";
+    }
+    $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('pdfs.appointment-ticket', ['appointment' => $appointment]);
+    return $pdf->stream('ticket_test.pdf');
+});
